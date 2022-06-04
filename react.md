@@ -20,3 +20,5 @@ Features of React:
 ## [Hooks](./hooks.md)
 
 ## [Questions](./questions.md)
+
+## [Practical Stuff](./practical.md)
