@@ -17,8 +17,10 @@ Features of React:
 * **Supports server-side rendering**
 
 
-## [Hooks](./hooks.md)
+## [Hooks](./topics/hooks.md)
 
-## [Questions](./questions.md)
+## [Questions](./topics/questions.md)
 
-## [Practical Stuff](./practical.md)
+## [Practical Stuff](./topics/practical.md)
+
+## [Custom Hooks](./topics/custom-hooks.md)
