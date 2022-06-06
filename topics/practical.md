@@ -112,3 +112,70 @@ function App() {
   );
 }
 ```
+
+---
+
+### Splash Raw JSON on Screen
+
+```jsx
+    const url = "https://random-data-api.com/api/users/random_user?size=10"
+
+    const [coffeesJSON, setCoffeesJSON] = useState("");
+
+    const fetchCoffeeJSON = () => {
+        return fetch(url)
+            .then((data) => {
+                console.log(data);
+                return data.json();
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+    }
+
+    useEffect(() => {
+        fetchCoffeeJSON().then((randomData) => setCoffeesJSON(JSON.stringify(randomData, null, 2)))
+    }, [])
+
+    return(
+        <div>
+            <pre>{coffeesJSON}</pre>
+        </div>
+    )
+```
+
+---
+
+### Load Next Page API
+
+```jsx
+    const [userData, setUserData] = useState([]);
+    const [counter, setCounter] = useState(1);
+
+    const fetchUserData = async () => {
+        setCounter(counter => counter + 1);
+        let url = `https://random-data-api.com/api/users/random_user?size=3?page=${counter}`
+        console.log(url)
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (response.ok) {
+            const users = await response.json();
+            console.log(users);
+            if (userData.length === 0) {
+                setUserData(users);
+            } else {
+                let updatedArr = [...userData, ...users]
+                setUserData(updatedArr)
+            }
+        }
+    }
+
+    useEffect(() => {
+        fetchUserData();
+    }, []);
+```
