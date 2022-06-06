@@ -177,5 +177,46 @@ function App() {
 
     useEffect(() => {
         fetchUserData();
+        // Note: here you might get an eslint warning that you need to include fetchUserData in the dependencies, which would cause infinite re-rendering
+
+        //To solve this use useRef as below
     }, []);
+```
+
+---
+
+### `useRef` for including fetch function into `useEffect` dependencies
+
+```jsx
+        const [userData, setUserData] = useState([]);
+    const [counter, setCounter] = useState(1);
+
+    const fetchUserData = useRef(() => { });
+
+    fetchUserData.current = async () => {
+        setCounter(counter => counter + 1);
+        let url = `https://random-data-api.com/api/users/random_user?size=3?page=${counter}`
+        console.log(url)
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (response.ok) {
+            const users = await response.json();
+            console.log(users);
+            if (userData.length === 0) {
+                setUserData(users);
+            } else {
+                let updatedArr = [...userData, ...users]
+                setUserData(updatedArr)
+            }
+        }
+    }
+
+    useEffect(() => {
+        fetchUserData.current();
+    }, [fetchUserData]);
 ```
