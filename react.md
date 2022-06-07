@@ -21,6 +21,8 @@ Features of React:
 
 ## [Questions](./topics/questions.md)
 
+## [JavaScript Utils](./topics/js-utils.md)
+
 ## [Practical Stuff](./topics/practical.md)
 
 ## [Custom Hooks](./topics/custom-hooks.md)
